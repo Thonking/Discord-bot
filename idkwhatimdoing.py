@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import random
+import asyncio
 
 description = '''An example bot to showcase the discord.ext.commands extension
 module.
@@ -59,5 +60,47 @@ async def cool(ctx):
 async def _bot():
     """Is the bot cool?"""
     await bot.say('Yes, the bot is cool.')
-help(commands.Bot)
-bot.run('¯\_(ツ)_/¯')
+
+@bot.command()
+async def shiet(content='content'):
+    await bot.say('shiet ' * 5) 
+    await bot.say('shiet ' * 5)     
+    await bot.say('shiet ' * 5) 
+    await bot.say('shiet ' * 5) 
+    await bot.say('shiet ' * 5) 
+
+@bot.command()
+async def RNA2Protein(content='RNA'):
+    if len(content) % 3 != 0:
+        await bot.say('Please give a sequence that has a number of bases that is divisible by 3')
+
+    for i in content:
+        if i is not 'G' or i is not 'C' or i is not 'A' or i is not 'U':
+            await bot.say('Only G, A, C, or U please.')
+            break
+
+@bot.command()
+async def DNA2RNA(content='DNA'):
+    
+    for i in content:
+        
+        if i is 'A':
+            await bot.say('U', end="")
+        elif i is 'G':
+            await bot.say('C', end="")
+        elif i is 'C':
+            await bot.say('G', end="")
+        elif i is 'T':
+            await bot.say('A', end="")
+        else: 
+            await bot.say('Only G, A, C, or T please.')
+            break
+    
+
+@bot.command()
+async def stephcurry(content='stephcurry'):
+    await bot.say('Steph Curry my ass.')
+
+
+
+bot.run('lul')
