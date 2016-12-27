@@ -62,7 +62,7 @@ async def _bot():
     await bot.say('Yes, the bot is cool.')
 
 @bot.command()
-async def shiet(content='content'):
+async def shiet():
     await bot.say('shiet ' * 5) 
     await bot.say('shiet ' * 5)     
     await bot.say('shiet ' * 5) 
@@ -71,34 +71,36 @@ async def shiet(content='content'):
 
 @bot.command()
 async def RNA2Protein(content='RNA'):
+    for i in content:
+            if i is not 'G' and i is not 'C' and i is not 'A' and i is not 'U':
+                await bot.say('Only G, A, C, or U please.')
+                break
+
     if len(content) % 3 != 0:
         await bot.say('Please give a sequence that has a number of bases that is divisible by 3')
+        
+    else:
+        amino_acids = {'UUU' : 'F', 'UUC' : 'F', 'UUA' : 'L', 'UUG' : 'L', 'CUU' : 'L', 'CUC' : 'L', 'CUA' : 'L', 'CUG' : 'L', 'AUU' : 'I', 'AUC' : 'I', 'AUA' : 'I', 'AUG' : 'M', 'GUU' : 'V', 'GUC' : 'V', 'GUA' : 'V', 'GUG' : 'V', 'UCU' : 'S', 'UCC' : 'S', 'UCA' : 'S', 'UCG' : 'S', 'CCU' : 'P', 'CCC' : 'P', 'CCA' : 'P', 'CCG' : 'P', 'ACU' : 'T', 'ACC' : 'T', 'ACA' : 'T', 'ACG' : 'T', 'GCU' : 'A', 'GCC' : 'A', 'GCA' : 'A', 'GCG' : 'A', 'UAU' : 'Y', 'UAC' : 'Y', 'UAA' : 'Stop', 'UAG' : 'Stop', 'CAU' : 'H', 'CAC' : 'H', 'CAA' : 'Q', 'CAG' : 'Q', 'AAU' : 'N', 'AAC' : 'N', 'AAA' : 'K', 'AAG' : 'K', 'GAU' : 'D', 'GAC' : 'D', 'GAA' : 'E', 'GAG' : 'E', 'UGU' : 'C', 'UGC' : 'C', 'UGA' : 'Stop', 'UGG' : 'W', 'CGU' : 'R', 'CGC' : 'R', 'CGA' : 'R', 'CGG' : 'R', 'AGU' : 'S', 'AGC' : 'S', 'AGA' : 'R', 'AGG' : 'R', 'GGU' : 'G', 'GGC' : 'G', 'GGA' : 'G', 'GGG' : 'G'}
+        codons = [content[i:i+3] for i in range(0, len(content), 3)]
+        protein = [amino_acids[x] for x in codons]
+        await bot.say(''.join(protein))
 
-    for i in content:
-        if i is not 'G' or i is not 'C' or i is not 'A' or i is not 'U':
-            await bot.say('Only G, A, C, or U please.')
-            break
+
 
 @bot.command()
 async def DNA2RNA(content='DNA'):
-    
-    for i in content:
-        
-        if i is 'A':
-            await bot.say('U', end="")
-        elif i is 'G':
-            await bot.say('C', end="")
-        elif i is 'C':
-            await bot.say('G', end="")
-        elif i is 'T':
-            await bot.say('A', end="")
-        else: 
+    for base in content:
+        if base is not 'G' and base is not 'C' and base is not 'A' and base is not 'T':
             await bot.say('Only G, A, C, or T please.')
             break
+    transcribe = {'A' : 'U', 'C' : 'G', 'G' : 'C', 'T' : 'A'}
+    sequence = list(content)
+    sequence = [transcribe[base] for base in sequence]
+    await bot.say(''.join(sequence))
     
 
 @bot.command()
-async def stephcurry(content='stephcurry'):
+async def stephcurry():
     await bot.say('Steph Curry my ass.')
 
 
