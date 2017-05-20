@@ -1,0 +1,11 @@
+aiohttp==1.0.5
+async-timeout==1.1.0
+BeautifulDiscord==0.1.0
+biopython==1.69
+chardet==2.3.0
+discord.py==0.16.0
+multidict==2.1.4
+numpy==1.12.1
+psutil==5.1.0
+selenium==3.0.2
+websockets==3.2
