@@ -32,6 +32,32 @@ async def roll(dice : str):
     result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
     await bot.say(result)
 
+@bot.command()
+async def mock(string):
+    template = '110010101010101101010101010010101'
+    new = ''
+    if len(string) > len(template):
+        pool = cycle(template)
+        for i,j in zip(string,pool):
+            if i == "L" or i == "l":
+                new += i.upper()
+            elif j == '1':
+                new += i.upper()
+            else:
+                new += i.lower()
+        await bot.say(new)
+
+    for i,j in zip(string,template):
+        if i == "L" or i == "l":
+            new += "L"
+        elif j == '1':
+            new += i.upper()
+        else:
+            new += i.lower()
+    await bot.say(new)
+    #with open('spongebobmockingmeme.jpg', 'rb') as f:
+        #await client.send_file(channel, f)
+
 @bot.command(description='For when you wanna settle the score some other way')
 async def choose(*choices : str):
     """Chooses between multiple choices."""
@@ -70,11 +96,15 @@ async def shiet():
     await bot.say('shiet ' * 5) 
 
 @bot.command()
-async def RNA2Protein(content='RNA'):
+async def RNA2Protein(content):
+
+    if len(content) < 1:
+        return await bot.say('No input detected.')
+
     for i in content:
-            if i is not 'G' and i is not 'C' and i is not 'A' and i is not 'U':
-                await bot.say('Only G, A, C, or U please.')
-                break
+        if i is not 'G' and i is not 'C' and i is not 'A' and i is not 'U':
+            return await bot.say('Only G, A, C, or U please.')
+                
 
     if len(content) % 3 != 0:
         await bot.say('Please give a sequence that has a number of bases that is divisible by 3')
@@ -85,7 +115,13 @@ async def RNA2Protein(content='RNA'):
         protein = [amino_acids[x] for x in codons]
         await bot.say(''.join(protein))
 
-
+@bot.command()
+async def RNA2Protein2(content):
+    await bot.say(content)
+    for i in content:
+            if i is not 'G' and i is not 'C' and i is not 'A' and i is not 'U':
+                return await bot.say('Only G, A, C, or U please.')
+    
 
 @bot.command()
 async def DNA2RNA(content='DNA'):
@@ -105,4 +141,4 @@ async def stephcurry():
 
 
 
-bot.run('lul')
+bot.run('lol')
